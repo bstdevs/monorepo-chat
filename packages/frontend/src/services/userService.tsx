@@ -3,41 +3,51 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 import { API_BASE_URL, CLOUD_NAME, UPLOAD_PRESET } from "../utils/constants";
 
 export const getUser = async (id: string) => {
-    const { data } = await axios.get(`${API_BASE_URL}/users/${id}`);
-    return data;
+    try {
+        const { data } = await axios.get(`${API_BASE_URL}/users/${id}`);
+        return data;
+    } catch (e) { }
 };
 
 export const getUsersBySearch = async (search: string) => {
-    const { data } = await axiosWithAuth.get(`/users/?search=${search}`);
-    return data;
+    try {
+        const { data } = await axiosWithAuth.get(`/users/?search=${search}`);
+        return data;
+    } catch (e) { }
 }
 
 export const updateUser = async (id: string, user: any) => {
-    const { data } = await axiosWithAuth.put(`/users/${id}`, user);
-    return data;
+    try {
+        const { data } = await axiosWithAuth.put(`/users/${id}`, user);
+        return data;
+    } catch (e) { }
 };
 
 // IMAGES
 export const uploadImages = async (images: any) => {
-    const results: any[] = []
+    try {
+        const results: any[] = []
 
-    for (let i = 0; i < images.length; i++) {
-        const formData = new FormData();
-        formData.append('file', images[i]);
-        formData.append('upload_preset', UPLOAD_PRESET!);
-        const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`, formData);
-        results.push(data.secure_url);
-    }
+        for (let i = 0; i < images.length; i++) {
+            const formData = new FormData();
+            formData.append('file', images[i]);
+            formData.append('upload_preset', UPLOAD_PRESET!);
+            const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`, formData);
+            results.push(data.secure_url);
+        }
 
-    return results;
+        return results;
+    } catch (e) { }
 }
 
 export const uploadUserImage = async (image: string) => {
-    const formData = new FormData();
-    formData.append('file', image);
-    formData.append('upload_preset', UPLOAD_PRESET!);
-    const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`, formData);
-    return data.secure_url
+    try {
+        const formData = new FormData();
+        formData.append('file', image);
+        formData.append('upload_preset', UPLOAD_PRESET!);
+        const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`, formData);
+        return data.secure_url
+    } catch (e) { }
 }
 
 // FRIENDS
@@ -67,6 +77,7 @@ export const checkFriend = async (userId: string, id: string) => {
 export const getRequests = async (id: string) => {
     const { data } = await axiosWithAuth.get(`/users/${id}/request`);
     return data;
+
 }
 
 export const setRequest = async (id: string, otherId: string, status: boolean) => {
