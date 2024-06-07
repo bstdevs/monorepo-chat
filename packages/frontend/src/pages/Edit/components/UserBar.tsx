@@ -26,7 +26,7 @@ const UserBar: FC<Props> = ({ user, userId, isAdded, participants, setParticipan
 
         const fetchUser = async () => {
             const result = await getUser(userId);
-            setParticipant(result.user);
+            setParticipant(result?.user ?? null);
         };
 
         fetchUser();

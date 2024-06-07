@@ -22,7 +22,7 @@ const UserBox = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const result = await getUser(user?.id!);
-      setLoggedUser(result.user);
+      setLoggedUser(result?.user ?? null);
     }
 
     fetchUser();

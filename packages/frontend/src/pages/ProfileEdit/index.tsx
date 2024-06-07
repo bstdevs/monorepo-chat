@@ -18,7 +18,7 @@ const ProfileEdit = () => {
     useEffect(() => {
         const fetchUser = async () => {
             const result = await getUser(user?.id!);
-            setDetails(result.user);
+            setDetails(result?.user ?? null);
         };
 
         fetchUser();

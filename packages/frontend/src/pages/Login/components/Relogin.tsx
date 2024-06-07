@@ -27,7 +27,7 @@ const Relogin: FC<Props> = ({ id, setIsFormOpen, setLastId }) => {
   useEffect(() => {
     const fetchUser = async () => {
       const result = await getUser(id);
-      setLastUser(result.user);
+      setLastUser(result?.user ?? null);
     }
 
     fetchUser();

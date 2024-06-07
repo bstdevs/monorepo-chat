@@ -16,7 +16,7 @@ const AddFriend = () => {
         setIsPending(true);
         const fetchUsers = async () => {
             const result = await getUsersBySearch(search);
-            setUsers(result.users);
+            setUsers(result?.users ?? null);
         }
 
         fetchUsers();
